@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ميلاد حور السعيد 🎂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <style>
+        :root { --main-pink: #ff85a2; --gold: #d4af37; --bg: #fffafb; }
+        
+        body { margin: 0; font-family: 'Cairo', sans-serif; background-color: var(--bg); color: #333; overflow-x: hidden; }
+
+        /* الشاشة الرئيسية */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), 
+                        url('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=1350') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        h1 { font-family: 'Amiri', serif; font-size: 4.5rem; color: var(--main-pink); margin: 0; animation: float 3s ease-in-out infinite; }
+        
+        /* مشغل الموسيقى */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* معرض الصور (محدث لصورتين فقط) */
+        .gallery-container { padding: 80px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+        
+        .gallery-flex { 
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 40px; 
+            margin-top: 40px;
+        }
+
+        .img-box {
+            background: white;
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: 0.5s ease;
+            max-width: 380px;
+            opacity: 0; /* للظهور التدريجي */
+            transform: translateY(30px);
+        }
+
+        .img-box.visible { opacity: 1; transform: translateY(0); }
+
+        .img-box:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        
+        .img-box img { width: 100%; height: 450px; border-radius: 15px; object-fit: cover; }
+
+        .final-msg { 
+            padding: 120px 20px; 
+            background: var(--main-pink); 
+            color: white; 
+            text-align: center; 
+            font-size: 1.8rem;
+            margin-top: 50px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            .img-box img { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="music-control">
+        <span style="font-size: 0.9rem;">🎵 تشغيل الموسيقى:</span>
+        <audio id="audio" controls>
+            <source src="birthday.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <header>
+        <h1>حور ✨</h1>
+        <p style="font-size: 1.8rem; margin-top: 10px; color: #555;">عيد ميلاد سعيد لأرق إنسانة 🎈</p>
+    </header>
+
+    <div class="gallery-container">
+        <h2 style="color: var(--main-pink); font-size: 2rem;">أجمل اللحظات 📸</h2>
+        <div class="gallery-flex">
+            
+            <div class="img-box">
+                <img src="1.jpg" alt="صورة 1">
+            </div>
+
+            <div class="img-box">
+                <img src="2.jpg" alt="صورة 2">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="final-msg">
+        <p>كل عام وأنتِ بقلب أبيض وروح جميلة.. كل عام وأنتِ حور ❤️</p>
+        <p style="font-size: 1rem; opacity: 0.8;">صنع بحب من قبل أحمد مقداد</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        window.onload = function() {
+            // تأثير القصاصات الورقية
+            var end = Date.now() + (4 * 1000);
+            var colors = ['#ff85a2', '#ffffff', '#d4af37'];
+
+            (function frame() {
+              confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+              confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+              if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+
+            // تأثير الظهور التدريجي للصور
+            setTimeout(() => {
+                document.querySelectorAll('.img-box').forEach(box => {
+                    box.classList.add('visible');
+                });
+            }, 500);
+        };
+    </script>
+</body>
+</html>
